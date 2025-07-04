@@ -150,5 +150,3 @@ for (let i = 0; i < game.gyms.length; i++) {
 console.log(game.gyms);
 
 console.log(game);
-
-console.log(game.party);
