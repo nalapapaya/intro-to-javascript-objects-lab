@@ -88,15 +88,67 @@ for (let i = 0; i < game.gyms.length; i++) {
 }
 console.log(game.gyms);
 
-const evolvedPokemon = [pokemon.at(1), pokemon.at(4), pokemon.at(7), pokemon.at(25), pokemon.at(11), pokemon.at(17)];
+const evolvedPokemon = [pokemon.at(1), pokemon.at(4), pokemon.at(7)];
 // console.log(evolvedPokemon)
-game.party = evolvedPokemon;
-console.log(game.party)
+game.party.splice(0, 3, ...evolvedPokemon);
+console.log(game.party);
 
 for (const p of game.party) {
-    console.log(p.name)
+  console.log(p.name);
 }
 
 console.log(pokemon.filter(starterPokemon));
 
+game.catchPokemon = function (pokemonObj) {
+  this.party.push(pokemonObj);
+};
 
+game.catchPokemon(pokemon[50]);
+console.log(game.party);
+
+game.catchPokemon = function (pokemonObj) {
+  game.party.push(pokemonObj);
+  const pokeballItem = game.items.find((item) => item.name === "pokeball");
+  pokeballItem.quantity--;
+};
+game.catchPokemon(pokemon[90]);
+console.log(game.items);
+
+for (let i = 0; i < game.gyms.length; i++) {
+  const g = game.gyms[i];
+  if (g.difficulty <= 6) {
+    g.completed = true;
+  }
+}
+console.log(game.gyms);
+
+game.gymStatus = function () {
+  const gymTally = { completed: 0, incomplete: 0 };
+  for (const gym of game.gyms) {
+    if (gym.completed) {
+      gymTally.completed++;
+    } else {
+    }
+    gymTally.incomplete++;
+  }
+  console.log(gymTally);
+};
+game.gymStatus();
+
+game.partyCount = function () {
+  return game.party.length;
+};
+
+console.log(game.partyCount());
+
+for (let i = 0; i < game.gyms.length; i++) {
+  const g = game.gyms[i];
+  if (g.difficulty <= 8) {
+    g.completed = true;
+  }
+}
+console.log(game.gyms);
+
+console.log(game);
+
+console.log(game.party);
